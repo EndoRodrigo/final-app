@@ -1,0 +1,27 @@
+name: tirando_factos
+description: "Proyecto creado resolver el problema de factos de la empresa holtec"
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.10.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  #Impelementacion de Gext
+  get: ^4.7.3
+
+  #Maneja lo response de la app
+  flutter_screenutil: ^5.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
