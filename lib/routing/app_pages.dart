@@ -1,5 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:tirando_factos/routing/app_routes.dart';
+import 'package:tirando_factos/ui/core/view/register_wiew.dart';
 
 import '../ui/core/view/splash_view.dart';
 
@@ -8,5 +9,6 @@ class AppPages {
 
   static final routes = [
     GetPage(name: AppRoutes.SPLASH, page: () => const SplashView()),
+    GetPage(name: AppRoutes.REGISTER, page: () => const RegisterWiew()),
   ];
 }
