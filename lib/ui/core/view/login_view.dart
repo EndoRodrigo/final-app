@@ -20,7 +20,7 @@ class LoginView extends StatelessWidget {
             SizedBox(height: 30,),
             TextField(decoration: InputDecoration(labelText: 'Password', border: OutlineInputBorder()),),
             SizedBox(height: 30,),
-            ElevatedButton(onPressed: (){Get.toNamed(AppRoutes.CUSTOMER);}, child: Text('Login')),
+            ElevatedButton(onPressed: (){Get.toNamed(AppRoutes.HOME);}, child: Text('Login')),
             SizedBox(height: 30,),
             ElevatedButton(onPressed: (){}, child: Text('Register')),
           ],
