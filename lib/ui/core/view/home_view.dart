@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../routing/app_routes.dart';
 import '../controller/home_controller.dart';
 import 'customer_view.dart';
 
-class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+class HomeView extends StatelessWidget {
+  HomeView({super.key});
+
+  final controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {

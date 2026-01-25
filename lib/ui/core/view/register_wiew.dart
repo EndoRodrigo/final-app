@@ -1,11 +1,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:tirando_factos/routing/app_routes.dart';
 
+import '../controller/auth_controller.dart';
+
 class RegisterWiew extends StatelessWidget {
-  const RegisterWiew({super.key});
+  RegisterWiew({super.key});
+
+  final controller = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +24,13 @@ class RegisterWiew extends StatelessWidget {
             SizedBox(height: 24,),
             TextField(
               decoration: InputDecoration(labelText: 'email',border: OutlineInputBorder()),
+              onChanged: (v) => controller.email.value = v,
             ),
             SizedBox(height: 24,),
             TextField(
               decoration: InputDecoration(labelText: 'Password', border: OutlineInputBorder()),
+              obscureText: true,
+              onChanged: (v) => controller.password.value = v,
             ),
             SizedBox(height: 24,),
             DropdownButtonFormField<String>(
@@ -31,16 +39,12 @@ class RegisterWiew extends StatelessWidget {
                 DropdownMenuItem(value: 'client', child: Text('Cliente')),
                 DropdownMenuItem(value: 'admin', child: Text('Administrador')),
               ],
-              onChanged: (value) {
-                if (value != null) {
-
-                }
-              },
+              onChanged: (v) => controller.selectedRole.value = v!,
             ),
             SizedBox(height: 30),
-            ElevatedButton(onPressed: (){}, child: Text('Register')),
+            ElevatedButton(onPressed: () => controller.register(), child: Text('Register')),
             SizedBox(height: 30),
-            ElevatedButton(onPressed: (){Get.toNamed(AppRoutes.LOGIN);}, child: Text('Login')),
+            ElevatedButton(onPressed: null, child: Text('Login')),
           ],
         ),
       ),
