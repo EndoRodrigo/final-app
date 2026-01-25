@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import '../controller/customer_controller.dart';
 
 class CustomerView extends GetView<CustomerController> {
-  const CustomerView({super.key});
+  CustomerView({super.key});
+
+  final controller = Get.put(CustomerController());
 
   @override
   Widget build(BuildContext context) {

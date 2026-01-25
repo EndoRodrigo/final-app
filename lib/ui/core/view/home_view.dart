@@ -16,7 +16,7 @@ class HomeView extends StatelessWidget {
         index: controller.currentPageIndex.value,
         children: [
           const Text('Explore'),
-          const CustomerView(),   // pestaña 0
+          CustomerView(),   // pestaña 0
           const Text('Profile'),  // pestaña 2
           const Text('Settings'), // pestaña 3
         ],
