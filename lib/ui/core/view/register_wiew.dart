@@ -44,7 +44,7 @@ class RegisterWiew extends StatelessWidget {
             SizedBox(height: 30),
             ElevatedButton(onPressed: () => controller.register(), child: Text('Register')),
             SizedBox(height: 30),
-            ElevatedButton(onPressed: null, child: Text('Login')),
+            ElevatedButton(onPressed: () => Get.toNamed(AppRoutes.LOGIN), child: Text('Login')),
           ],
         ),
       ),
