@@ -22,6 +22,9 @@ dependencies:
   #Maneja los servicos de autenticacion
   firebase_auth: ^6.1.3
 
+  #Maneja la comunicacion de DB FIREBASE
+  cloud_firestore: ^6.1.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

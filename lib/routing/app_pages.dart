@@ -1,5 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:tirando_factos/routing/app_routes.dart';
+import 'package:tirando_factos/ui/core/Binding/customer_binding.dart';
 import 'package:tirando_factos/ui/core/Binding/home_binding.dart';
 import 'package:tirando_factos/ui/core/view/customer_view.dart';
 import 'package:tirando_factos/ui/core/view/home_view.dart';
@@ -16,6 +17,6 @@ class AppPages {
     GetPage(name: AppRoutes.REGISTER, page: () => const RegisterWiew()),
     GetPage(name: AppRoutes.LOGIN, page: () => const LoginView()),
     GetPage(name: AppRoutes.HOME, page: () =>  HomeView(), binding: HomeBinding()),
-    GetPage(name: AppRoutes.CUSTOMER, page: () =>  CustomerView(), )
+    GetPage(name: AppRoutes.CUSTOMER, page: () =>  CustomerView(), binding: CustomerBinding())
   ];
 }
