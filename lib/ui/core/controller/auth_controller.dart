@@ -46,13 +46,13 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> login(String email, String password) async {
+  Future<void> login() async {
     try {
       isLoading.value = true;
 
       await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
+        email: email.value,
+        password: password.value,
       );
 
       Get.offAllNamed(AppRoutes.HOME);
