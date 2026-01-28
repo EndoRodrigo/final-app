@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tirando_factos/ui/core/view/customer_detail_view.dart';
 
 import '../controller/home_controller.dart';
 import 'customer_view.dart';
@@ -16,7 +17,7 @@ class HomeView extends StatelessWidget {
         index: controller.currentPageIndex.value,
         children: [
           const Text('Explore'),
-          CustomerView(),   // pestaña 0
+          CustomerDetailView(),   // pestaña 0
           const Text('Profile'),  // pestaña 2
           const Text('Settings'), // pestaña 3
         ],

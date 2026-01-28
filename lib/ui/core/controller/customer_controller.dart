@@ -68,4 +68,15 @@ class CustomerController extends GetxController{
       municipalityId: municipalityId.value,
     );
   }
+
+  void clearInput() {
+    identification.value = '';
+    names.value = '';
+    address.value = '';
+    email.value = '';
+    phone.value = '';
+    identificationDocumentId.value = '';
+    tributeId.value = '';
+    municipalityId.value = '';
+  }
 }
