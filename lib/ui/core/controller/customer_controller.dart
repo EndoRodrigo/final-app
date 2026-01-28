@@ -25,7 +25,7 @@ class CustomerController extends GetxController{
 
   final CustomerService _service = CustomerService();
 
-  Stream<QuerySnapshot> get customers => _service.getCustomers();
+  Stream<QuerySnapshot> get getCustomers => _service.getCustomers();
 
   Future<void> addCustomer() async {
     if (!formKey.currentState!.validate()) return;
