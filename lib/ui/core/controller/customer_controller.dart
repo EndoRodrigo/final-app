@@ -49,11 +49,22 @@ class CustomerController extends GetxController{
   }
 
   Future<void> removeCustomer(String id) async {
-    await _service.deleteCustomer(id);
+    try{
+      isLoading.value = true;
+      await _service.deleteCustomer(id);
+      Get.snackbar('Éxito', 'Cliente eliminado correctamente', snackPosition: SnackPosition.BOTTOM,);
+
+    }catch(e){
+      Get.snackbar('Error', 'No se pudo eliminar el cliente');
+    }finally{
+      isLoading.value = false;
+    }
+
   }
 
   CustomerModel buildCustomer() {
     return CustomerModel(
+      id: '',
       identification: identification.value,
       dv: dv.value,
       company: company.value,

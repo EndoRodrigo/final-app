@@ -77,13 +77,13 @@ class CustomerDetailView extends StatelessWidget {
                     itemCount: clientes.length,
                     separatorBuilder: (_, __) => const Divider(),
                     itemBuilder: (context, index) {
-                      final data =
-                      clientes[index].data() as Map<String, dynamic>;
+                      final doc = clientes[index];
+                      final data = doc.data() as Map<String, dynamic>;
 
                       return ListTile(
                         leading: const Icon(Icons.person),
                         title: Text(data['names'] ?? 'Sin nombre'),
-                        subtitle: Text(data['email'] ?? ''),
+                        subtitle: Text(data['id'] ?? ''),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -94,9 +94,7 @@ class CustomerDetailView extends StatelessWidget {
                               icon: const Icon(Icons.edit),
                             ),
                             IconButton(
-                              onPressed: () {
-                                Get.toNamed(AppRoutes.CUSTOMERDETAIL, arguments: data);
-                              },
+                              onPressed: () => controller.removeCustomer(doc.id),
                               icon: const Icon(Icons.delete),
                             ),
                           ],

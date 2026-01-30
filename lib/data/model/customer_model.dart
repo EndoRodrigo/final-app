@@ -3,6 +3,7 @@ import 'package:tirando_factos/domain/models/customer.dart';
 class CustomerModel extends Customer{
 
   CustomerModel({
+    required super.id,
     required super.identification,
     required super.dv,
     required super.company,
@@ -36,6 +37,7 @@ class CustomerModel extends Customer{
 
   factory CustomerModel.fromMap(String id, Map<String, dynamic> map) {
     return CustomerModel(
+      id: id,
       identification: map["identification"],
       dv: map["dv"],
       company: map["company"] ?? "",
