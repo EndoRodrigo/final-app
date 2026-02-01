@@ -83,13 +83,14 @@ class CustomerDetailView extends StatelessWidget {
                       return ListTile(
                         leading: const Icon(Icons.person),
                         title: Text(data['names'] ?? 'Sin nombre'),
-                        subtitle: Text(data['id'] ?? ''),
+                        subtitle: Text(data['email'] ?? ''),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
                               onPressed: () {
-                                Get.toNamed(AppRoutes.CUSTOMERDETAIL, arguments: data);
+                                Get.toNamed(AppRoutes.CUSTOMER, arguments: data);
+                                print('Data $data');
                               },
                               icon: const Icon(Icons.edit),
                             ),
