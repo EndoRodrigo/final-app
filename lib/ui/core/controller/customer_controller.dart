@@ -33,23 +33,6 @@ class CustomerController extends GetxController{
   final identificationDocumentId= ''.obs;
   final municipalityId= ''.obs;
 
-  // ---------- LIFECYCLE  ----------
-  @override
-  void onInit() {
-    super.onInit();
-    customer.value = Get.arguments;
-    if (isEditing) {
-      final c = customer.value!;
-      identificationDocumentId.value = c['identification_document_id']?.toString() ?? '';
-      identification.value = c['identification'] ?? '';
-      names.value = c['names'] ?? '';
-      address.value = c['address'] ?? '';
-      email.value = c['email'] ?? '';
-      phone.value = c['phone'] ?? '';
-      tributeId.value = c['tribute_id']?.toString() ?? '';
-      municipalityId.value = c['municipality_id']?.toString() ?? '';
-    }
-  }
 
   // ---------- ACTIONS ----------
   void submit() {
@@ -101,22 +84,46 @@ class CustomerController extends GetxController{
   }
 
   CustomerModel _payload() {
-    return CustomerModel(
-      id: '',
-      identification: identification.value,
-      dv: dv.value,
-      company: company.value,
-      tradeName: tradeName.value,
-      names: names.value,
-      address: address.value,
-      email: email.value,
-      phone: phone.value,
-      legalOrganizationId: legalOrganizationId.value,
-      tributeId: tributeId.value,
-      identificationDocumentId: int.parse(identificationDocumentId.value),
-      municipalityId: municipalityId.value,
-    );
+    customer.value = Get.arguments;
+    print('Informacion del customer $customer');
+    if(Get.arguments != null){
+      print('Se ejecuta metodo de actualizar');
+      return CustomerModel(
+          id: customer.value!['id'],
+          identification: customer.value!['identification'],
+          dv: customer.value!['dv'],
+          company: customer.value!['company'],
+          tradeName: customer.value!['trade_name'],
+          names: customer.value!['names'],
+          address: customer.value!['address'],
+          email: customer.value!['email'],
+          phone: customer.value!['phone'],
+          legalOrganizationId: customer.value!['legal_organization_id'],
+          tributeId: customer.value!['tribute_id'],
+          identificationDocumentId: customer.value!['identification_document_id'],
+          municipalityId: customer.value!['municipality_id'],
+      );
+    }else{
+      print('Se ejecuta metodo de crear');
+      return CustomerModel(
+        id: '',
+        identification: identification.value,
+        dv: dv.value,
+        company: company.value,
+        tradeName: tradeName.value,
+        names: names.value,
+        address: address.value,
+        email: email.value,
+        phone: phone.value,
+        legalOrganizationId: legalOrganizationId.value,
+        tributeId: tributeId.value,
+        identificationDocumentId: int.parse(identificationDocumentId.value),
+        municipalityId: municipalityId.value,
+      );
+    }
+
   }
+
 
   void clearInput() {
     identification.value = '';

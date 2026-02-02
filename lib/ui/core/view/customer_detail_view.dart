@@ -5,6 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
+import '../../../data/model/customer_model.dart';
 import '../../../routing/app_routes.dart';
 import '../controller/customer_controller.dart';
 
@@ -90,7 +91,7 @@ class CustomerDetailView extends StatelessWidget {
                             IconButton(
                               onPressed: () {
                                 Get.toNamed(AppRoutes.CUSTOMER, arguments: data);
-                                print('Data $data');
+                                controller.editCustomer();
                               },
                               icon: const Icon(Icons.edit),
                             ),
