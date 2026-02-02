@@ -19,7 +19,7 @@ class CustomerController extends GetxController{
   final Rxn<Map<String, dynamic>> customer = Rxn<Map<String, dynamic>>();
   bool get isEditing => customer.value != null;
 
-  // ---------- FIELS ----------
+  // ---------- FIELDS ----------
   final identification = ''.obs;
   final dv= ''.obs;
   final company= ''.obs;
@@ -33,6 +33,11 @@ class CustomerController extends GetxController{
   final identificationDocumentId= ''.obs;
   final municipalityId= ''.obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+    getData();
+  }
 
   // ---------- ACTIONS ----------
   void submit() {
@@ -46,16 +51,11 @@ class CustomerController extends GetxController{
   Stream<QuerySnapshot> get getCustomers => _service.getCustomers();
 
   Future<void> addCustomer() async {
-    if (!formKey.currentState!.validate()) return;
-
     try {
       isLoading.value = true;
       await _service.createCustomer(_payload());
       Get.snackbar('Éxito', 'Cliente creado correctamente', snackPosition: SnackPosition.BOTTOM,);
-      Get.toNamed(AppRoutes.CUSTOMERDETAIL);
-
-      //formKey.currentState?.reset();
-
+      Get.back();
     } catch (e) {
       Get.snackbar('Error', 'No se pudo crear el cliente');
     } finally {
@@ -64,17 +64,23 @@ class CustomerController extends GetxController{
   }
 
   Future<void> editCustomer() async {
-    await _service.updateCustomer(_payload());
+    try {
+      isLoading.value = true;
+      await _service.updateCustomer(_payload());
+      Get.snackbar('Éxito', 'Cliente actualizado correctamente', snackPosition: SnackPosition.BOTTOM,);
+      Get.back();
+    } catch (e) {
+      Get.snackbar('Error', 'No se pudo actualizar el cliente');
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   Future<void> removeCustomer(String id) async {
-    print('Se preciono el boton de eliminar $id');
     try{
       isLoading.value = true;
-
       await _service.deleteCustomer(id);
       Get.snackbar('Éxito', 'Cliente eliminado correctamente', snackPosition: SnackPosition.BOTTOM,);
-
     }catch(e){
       Get.snackbar('Error', 'No se pudo eliminar el cliente');
     }finally{
@@ -84,29 +90,8 @@ class CustomerController extends GetxController{
   }
 
   CustomerModel _payload() {
-    customer.value = Get.arguments;
-    print('Informacion del customer $customer');
-    if(Get.arguments != null){
-      print('Se ejecuta metodo de actualizar');
-      return CustomerModel(
-          id: customer.value!['id'],
-          identification: customer.value!['identification'],
-          dv: customer.value!['dv'],
-          company: customer.value!['company'],
-          tradeName: customer.value!['trade_name'],
-          names: customer.value!['names'],
-          address: customer.value!['address'],
-          email: customer.value!['email'],
-          phone: customer.value!['phone'],
-          legalOrganizationId: customer.value!['legal_organization_id'],
-          tributeId: customer.value!['tribute_id'],
-          identificationDocumentId: customer.value!['identification_document_id'],
-          municipalityId: customer.value!['municipality_id'],
-      );
-    }else{
-      print('Se ejecuta metodo de crear');
-      return CustomerModel(
-        id: '',
+    return CustomerModel(
+        id: isEditing ? customer.value!['id'] : '',
         identification: identification.value,
         dv: dv.value,
         company: company.value,
@@ -117,22 +102,46 @@ class CustomerController extends GetxController{
         phone: phone.value,
         legalOrganizationId: legalOrganizationId.value,
         tributeId: tributeId.value,
-        identificationDocumentId: int.parse(identificationDocumentId.value),
+        identificationDocumentId: int.tryParse(identificationDocumentId.value) ?? 1,
         municipalityId: municipalityId.value,
-      );
-    }
+    );
+  }
 
+  void getData(){
+    final args = Get.arguments;
+    if (args != null && args is Map<String, dynamic>) {
+      customer.value = args;
+      identification.value = args['identification']?.toString() ?? '';
+      dv.value = args['dv']?.toString() ?? '';
+      company.value = args['company'] ?? '';
+      tradeName.value = args['trade_name'] ?? '';
+      names.value = args['names'] ?? '';
+      address.value = args['address'] ?? '';
+      email.value = args['email'] ?? '';
+      phone.value = args['phone']?.toString() ?? '';
+      legalOrganizationId.value = args['legal_organization_id']?.toString() ?? '';
+      tributeId.value = args['tribute_id']?.toString() ?? '';
+      identificationDocumentId.value = args['identification_document_id']?.toString() ?? '';
+      municipalityId.value = args['municipality_id']?.toString() ?? '';
+    } else {
+      customer.value = null;
+      clearInput();
+    }
   }
 
 
   void clearInput() {
     identification.value = '';
+    dv.value = '';
+    company.value = '';
+    tradeName.value = '';
     names.value = '';
     address.value = '';
     email.value = '';
     phone.value = '';
-    identificationDocumentId.value = '';
+    legalOrganizationId.value = '';
     tributeId.value = '';
+    identificationDocumentId.value = '';
     municipalityId.value = '';
   }
 }

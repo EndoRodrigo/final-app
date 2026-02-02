@@ -1,11 +1,7 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get.dart';
 
-import '../../../data/model/customer_model.dart';
 import '../../../routing/app_routes.dart';
 import '../controller/customer_controller.dart';
 
@@ -26,7 +22,10 @@ class CustomerDetailView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ElevatedButton(
-              onPressed: () => Get.toNamed(AppRoutes.CUSTOMER),
+              onPressed: () {
+                Get.toNamed(AppRoutes.CUSTOMER, arguments: null);
+                controller.getData();
+              },
               child: const Text('Crear cliente'),
             ),
 
@@ -34,9 +33,9 @@ class CustomerDetailView extends StatelessWidget {
 
             Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: TextField(
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Buscar',
                       border: OutlineInputBorder(),
                     ),
@@ -49,8 +48,7 @@ class CustomerDetailView extends StatelessWidget {
                 ),
               ],
             ),
-            Divider(),
-            //const SizedBox(height: 18),
+            const Divider(),
 
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
@@ -80,6 +78,8 @@ class CustomerDetailView extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final doc = clientes[index];
                       final data = doc.data() as Map<String, dynamic>;
+                      // Aseguramos que el ID del documento esté en el mapa
+                      data['id'] = doc.id;
 
                       return ListTile(
                         leading: const Icon(Icons.person),
@@ -91,7 +91,7 @@ class CustomerDetailView extends StatelessWidget {
                             IconButton(
                               onPressed: () {
                                 Get.toNamed(AppRoutes.CUSTOMER, arguments: data);
-                                controller.editCustomer();
+                                controller.getData();
                               },
                               icon: const Icon(Icons.edit),
                             ),

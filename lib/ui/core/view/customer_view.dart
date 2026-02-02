@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:get/get.dart';
 
 import '../controller/customer_controller.dart';
 
@@ -21,7 +20,7 @@ class CustomerView extends GetView<CustomerController> {
                 // ------ DOCUMENT TYPE ------------
                 Obx(() => DropdownButtonFormField<String>(
                   value: controller.identificationDocumentId.value.isEmpty ? null : controller.identificationDocumentId.value,
-                  decoration: const InputDecoration(labelText: 'Selecionar tipo de documento', border: OutlineInputBorder(),),
+                  decoration: const InputDecoration(labelText: 'Seleccionar tipo de documento', border: OutlineInputBorder(),),
                   items: const [
                     DropdownMenuItem(value: '1', child: Text('Registro civil')),
                     DropdownMenuItem(value: '2', child: Text('Tarjeta de identidad'),),
@@ -36,7 +35,7 @@ class CustomerView extends GetView<CustomerController> {
                     DropdownMenuItem(value: '11', child: Text('NUIP')),
                   ],
                   onChanged: (v) => controller.identificationDocumentId.value = v!,),),
-                SizedBox(height: 18),
+                const SizedBox(height: 18),
                 // ------ IDENTIFICACION ------------
                 TextFormField(
                   initialValue: controller.identification.value,
@@ -54,9 +53,9 @@ class CustomerView extends GetView<CustomerController> {
                 // ------ ADDRESS ------------
                 TextFormField(
                   initialValue: controller.address.value,
-                  decoration: InputDecoration(border: OutlineInputBorder(), label: Text('address'),),
+                  decoration: const InputDecoration(border: OutlineInputBorder(), labelText: 'Dirección',),
                   onChanged: (v) => controller.address.value = v,),
-                SizedBox(height: 18),
+                const SizedBox(height: 18),
                 // ------ EMAIL ------------
                 TextFormField(
                   initialValue: controller.email.value,
@@ -65,44 +64,45 @@ class CustomerView extends GetView<CustomerController> {
                   validator: (v) =>
                       v == null || v.isEmpty ? 'Campo requerido' : null,
                 ),
-                SizedBox(height: 18),
+                const SizedBox(height: 18),
                 // ------ PHONE ------------
                 TextFormField(
                   initialValue: controller.phone.value,
-                  decoration: InputDecoration(border: OutlineInputBorder(), label: Text('phone'),),
+                  decoration: const InputDecoration(border: OutlineInputBorder(), labelText: 'Teléfono',),
                   onChanged: (v) => controller.phone.value = v,),
-                SizedBox(height: 18),
-                // ------ IDENTIFICATION DOCUMENT ------------
-                DropdownButtonFormField<String>(
-                  value: controller.identificationDocumentId.value.isEmpty ? null : controller.identificationDocumentId.value,
-                  decoration: const InputDecoration(labelText: 'identification_document_id', border: OutlineInputBorder(),),
+                const SizedBox(height: 18),
+                // ------ LEGAL ORGANIZATION ------------
+                Obx(() => DropdownButtonFormField<String>(
+                  value: controller.legalOrganizationId.value.isEmpty ? null : controller.legalOrganizationId.value,
+                  decoration: const InputDecoration(labelText: 'Organización legal', border: OutlineInputBorder(),),
                   items: const [
-                    DropdownMenuItem(value: '1', child: Text('Persona Juridica'),),
+                    DropdownMenuItem(value: '1', child: Text('Persona Jurídica'),),
                     DropdownMenuItem(value: '2', child: Text('Persona Natural'),),
                   ],
-                  onChanged: (v) => controller.identificationDocumentId.value = v!,),
-                SizedBox(height: 18),
-                // ------ TRUBUTE ------------
-                DropdownButtonFormField<String>(
+                  onChanged: (v) => controller.legalOrganizationId.value = v!,),
+                ),
+                const SizedBox(height: 18),
+                // ------ TRIBUTE ------------
+                Obx(() => DropdownButtonFormField<String>(
                   value: controller.tributeId.value.isEmpty ? null : controller.tributeId.value,
-                  decoration: const InputDecoration(labelText: 'tribute_id ', border: OutlineInputBorder(),),
+                  decoration: const InputDecoration(labelText: 'Tributo', border: OutlineInputBorder(),),
                   items: const [
                     DropdownMenuItem(value: '18', child: Text('IVA')),
                     DropdownMenuItem(value: '21', child: Text('No aplica')),
                   ],
                   onChanged: (v) => controller.tributeId.value = v!,
-                ),
-                SizedBox(height: 18),
+                )),
+                const SizedBox(height: 18),
                 // ------ MUNICIPALITY ------------
-                DropdownButtonFormField<String>(
+                Obx(() => DropdownButtonFormField<String>(
                   value: controller.municipalityId.value.isEmpty ? null : controller.municipalityId.value,
-                  decoration: const InputDecoration(labelText: 'municipality_id ', border: OutlineInputBorder(),),
+                  decoration: const InputDecoration(labelText: 'Municipio', border: OutlineInputBorder(),),
                   items: const [
                     DropdownMenuItem(value: '18', child: Text('Rionegro')),
                     DropdownMenuItem(value: '21', child: Text('Sabanalarga')),
                   ],
                   onChanged: (v) => controller.municipalityId.value = v!,
-                ),
+                )),
                 const SizedBox(height: 30),
                 Obx(() => controller.isLoading.value ? const CircularProgressIndicator() : SizedBox(
                     width: double.infinity,
