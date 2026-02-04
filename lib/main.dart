@@ -4,8 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tirando_factos/routing/app_pages.dart';
 import 'package:tirando_factos/routing/app_routes.dart';
-import 'package:tirando_factos/ui/core/theme/app_theme.dart';
 
+import 'congif/theme/app_theme.dart';
 import 'firebase_options.dart';
 
 void main() async {
