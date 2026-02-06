@@ -24,7 +24,8 @@ class Items {
     required this.standard_code_id,
     required this.is_excluded,
     required this.tribute_id,
-    required this.withholding_taxes});
+    this.withholding_taxes = const [],
+  });
 }
 
 
