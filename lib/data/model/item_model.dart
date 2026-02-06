@@ -3,6 +3,7 @@ import 'package:tirando_factos/domain/models/withholding_taxes.dart';
 
 class ItemModel extends Items {
   ItemModel({
+    required super.id,
     required super.code_reference,
     required super.name,
     required super.quantity,
@@ -35,8 +36,9 @@ class ItemModel extends Items {
   }
 
   /// Crea el objeto desde un Map (respuesta de API)
-  factory ItemModel.fromMap(Map<String, dynamic> map) {
+  factory ItemModel.fromMap(String id,Map<String, dynamic> map) {
     return ItemModel(
+      id: id,
       code_reference: map['code_reference'] ?? '',
       name: map['name'] ?? '',
       quantity: map['quantity'] ?? 0,

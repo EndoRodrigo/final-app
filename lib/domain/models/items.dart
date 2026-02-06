@@ -1,6 +1,7 @@
 import 'package:tirando_factos/domain/models/withholding_taxes.dart';
 
 class Items {
+  final String? id;
   final String code_reference;
   final String name;
   final int quantity;
@@ -14,6 +15,7 @@ class Items {
   final List<Withholding_taxes> withholding_taxes;
 
   Items({
+    this.id,
     required this.code_reference,
     required this.name,
     required this.quantity,
