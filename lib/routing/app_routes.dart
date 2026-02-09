@@ -5,4 +5,6 @@ class AppRoutes {
   static const HOME = '/home';
   static const CUSTOMER = '/customer';
   static const CUSTOMERDETAIL = '/customer-detail';
+  static const ITEM = '/item';
+  static const ITEMDETAIL = '/item-detail';
 }
