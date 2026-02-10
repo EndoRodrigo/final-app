@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tirando_factos/data/model/item_model.dart';
 
-
+import '../../../data/model/item_model.dart';
 import '../../../data/services/Item_service.dart';
 import '../../../domain/models/withholding_taxes.dart';
 
@@ -16,8 +15,9 @@ class ItemController extends GetxController{
 
   // ---------- DATA ----------
 
-  final Rxn<Map<String, dynamic>> Item = Rxn<Map<String, dynamic>>();
-  bool get isEditing => Item.value != null;
+  final Rxn<Map<String, dynamic>> controller = Rxn<Map<String, dynamic>>();
+  bool get isEditing => controller.value != null;
+  Set<String> Opcion = { 'si', 'no' };
 
   // ---------- FIELDS ----------
   final code_reference = ''.obs;
@@ -42,7 +42,7 @@ class ItemController extends GetxController{
   // ---------- ACTIONS ----------
   void submit() {
     if (!formKey.currentState!.validate()) return;
-    isEditing ? editItem() : addItem();
+    isEditing ? editcontroller() : addcontroller();
   }
 
 
@@ -50,7 +50,7 @@ class ItemController extends GetxController{
 
   Stream<QuerySnapshot> get getItems => _service.getItems();
 
-  Future<void> addItem() async {
+  Future<void> addcontroller() async {
     try {
       isLoading.value = true;
       await _service.createItem(_payload());
@@ -63,7 +63,7 @@ class ItemController extends GetxController{
     }
   }
 
-  Future<void> editItem() async {
+  Future<void> editcontroller() async {
     try {
       isLoading.value = true;
       await _service.updateItem(_payload());
@@ -91,7 +91,7 @@ class ItemController extends GetxController{
 
   ItemModel _payload() {
     return ItemModel(
-      id: Item.value?['id'] ?? '',
+      id: controller.value?['id'] ?? '',
       code_reference: code_reference.value,
       name: name.value,
       quantity: quantity.value,
@@ -109,21 +109,21 @@ class ItemController extends GetxController{
   void getData(){
     final args = Get.arguments;
     if (args != null && args is Map<String, dynamic>) {
-      Item.value = args;
-      code_reference.value = Item.value!['code_reference'];
-      name.value = Item.value!['name'];
-      quantity.value = Item.value!['quantity'];
-      discount_rate.value = Item.value!['discount_rate'];
-      price.value = Item.value!['price'];
-      tax_rate.value = Item.value!['tax_rate'];
-      unit_measure_id.value = Item.value!['unit_measure_id'];
-      standard_code_id.value = Item.value!['standard_code_id'];
-      is_excluded.value = Item.value!['is_excluded'];
-      tribute_id.value = Item.value!['tribute_id'];
-      withholding_taxes.value = Item.value!['withholding_taxes'];
+      controller.value = args;
+      code_reference.value = controller.value!['code_reference'];
+      name.value = controller.value!['name'];
+      quantity.value = controller.value!['quantity'];
+      discount_rate.value = controller.value!['discount_rate'];
+      price.value = controller.value!['price'];
+      tax_rate.value = controller.value!['tax_rate'];
+      unit_measure_id.value = controller.value!['unit_measure_id'];
+      standard_code_id.value = controller.value!['standard_code_id'];
+      is_excluded.value = controller.value!['is_excluded'];
+      tribute_id.value = controller.value!['tribute_id'];
+      withholding_taxes.value = controller.value!['withholding_taxes'];
 
     } else {
-      Item.value = null;
+      controller.value = null;
       clearInput();
     }
   }
