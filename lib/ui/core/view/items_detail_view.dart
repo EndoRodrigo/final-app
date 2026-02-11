@@ -82,13 +82,13 @@ class ItemsDetailView extends StatelessWidget {
                       return ListTile(
                         leading: const Icon(Icons.person),
                         title: Text(data['name'] ?? 'Sin nombre'),
-                        subtitle: Text(data['Price'] ?? ''),
+                        subtitle: Text(data['code_reference'] ?? ''),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
                               onPressed: () {
-                                Get.toNamed(AppRoutes.CUSTOMER, arguments: data);
+                                Get.toNamed(AppRoutes.ITEM, arguments: data);
                                 controller.getData();
                               },
                               icon: const Icon(Icons.edit),

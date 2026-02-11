@@ -30,7 +30,7 @@ class ItemController extends GetxController{
   final standard_code_id = 0.obs;
   final is_excluded = 0.obs;
   final tribute_id = 0.obs;
-  final withholding_taxes = <Withholding_taxes>[].obs;
+  //final withholding_taxes = <Withholding_taxes>[].obs;
 
 
   @override
@@ -53,6 +53,7 @@ class ItemController extends GetxController{
   Future<void> addcontroller() async {
     try {
       isLoading.value = true;
+      print(_payload());
       await _service.createItem(_payload());
       Get.snackbar('Éxito', 'Cliente creado correctamente', snackPosition: SnackPosition.BOTTOM,);
       Get.back();
@@ -102,7 +103,7 @@ class ItemController extends GetxController{
       standard_code_id: standard_code_id.value,
       is_excluded: is_excluded.value,
       tribute_id: tribute_id.value,
-      withholding_taxes: withholding_taxes.value,
+      //withholding_taxes: withholding_taxes.value,
     );
   }
 
@@ -120,7 +121,7 @@ class ItemController extends GetxController{
       standard_code_id.value = controller.value!['standard_code_id'];
       is_excluded.value = controller.value!['is_excluded'];
       tribute_id.value = controller.value!['tribute_id'];
-      withholding_taxes.value = controller.value!['withholding_taxes'];
+      //withholding_taxes.value = controller.value!['withholding_taxes'];
 
     } else {
       controller.value = null;
@@ -140,6 +141,6 @@ class ItemController extends GetxController{
     standard_code_id.value = 0;
     is_excluded.value = 0;
     tribute_id.value = 0;
-    withholding_taxes.value = [];
+    //withholding_taxes.value = [];
   }
 }
