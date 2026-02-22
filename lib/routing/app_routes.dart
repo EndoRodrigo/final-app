@@ -7,4 +7,9 @@ class AppRoutes {
   static const CUSTOMERDETAIL = '/customer-detail';
   static const ITEM = '/item';
   static const ITEMDETAIL = '/item-detail';
+  static const CART = '/cart';
+  static const ORDER = '/order';
+  static const ORDERDETAIL = '/order-detail';
+  static const PROFILE = '/profile';
+  static const SETTINGS = '/settings';
 }
