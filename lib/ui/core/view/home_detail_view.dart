@@ -42,15 +42,25 @@ class HomeDetailView extends StatelessWidget {
                   final clientes = snapshot.data!.docs;
 
                   return ListView.builder(
-                      itemCount: clientes.length,
-                      itemBuilder: (context, index) {
-                        final doc = clientes[index];
-                        final data = doc.data() as Map<String, dynamic>;
-                        // Aseguramos que el ID del documento esté en el mapa
-                        data['id'] = doc.id;
+                    itemCount: clientes.length,
+                    itemBuilder: (context, index) {
+                      final doc = clientes[index];
+                      final data = doc.data() as Map<String, dynamic>;
 
-                        return ModernProductListCard(name: data['name'] ?? 'Sin nombre', price: data['price'].toString(), imageUrl: data['image_url'] ?? '',);
-                      }
+                      data['id'] = doc.id;
+
+                      return ModernProductListCard(
+                        name: data['name'] ?? 'Sin nombre',
+                        price: data['price'].toString(),
+                        imageUrl: data['image_url'] ?? '',
+                        onTap: () {
+                          Get.toNamed(
+                            AppRoutes.INFO,
+                            arguments: data,
+                          );
+                        },
+                      );
+                    },
                   );
                 },
               ),

@@ -10,6 +10,7 @@ import 'package:tirando_factos/ui/core/view/login_view.dart';
 import 'package:tirando_factos/ui/core/view/register_wiew.dart';
 
 import '../ui/core/binding/customer_binding.dart';
+import '../ui/core/view/information_product.dart';
 import '../ui/core/view/splash_view.dart';
 
 class AppPages {
@@ -23,6 +24,7 @@ class AppPages {
     GetPage(name: AppRoutes.CUSTOMER, page: () =>  CustomerView(), binding: CustomerBinding()),
     GetPage(name: AppRoutes.CUSTOMERDETAIL, page: () =>  CustomerDetailView()),
     GetPage(name: AppRoutes.ITEM, page: () =>  ItemView(), binding: Itembinding()),
-    GetPage(name: AppRoutes.ITEMDETAIL, page: () =>  ItemsDetailView())
+    GetPage(name: AppRoutes.ITEMDETAIL, page: () =>  ItemsDetailView()),
+    GetPage(name: AppRoutes.INFO, page: () =>  InformationProduct()),
   ];
 }
